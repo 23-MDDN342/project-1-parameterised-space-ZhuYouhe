@@ -2,34 +2,55 @@
 // var y=300;
 // var a=100;
 // var b=100;
-let topRectSize=width/10;
-let spaceingSize=width/9;
+// let topRectSize=width/10;
+// let spaceingSize=width/9;
+
 
 
 function draw_one_frame(cur_frac) {
-
-	for(let i=1; i<=width/spaceingSize; i++){
-		for(let j=1; j+1<=height/spaceingSize; j++){
-				
-	stroke(255);
-	noFill();
-	rectMode(CENTER);
-	ellipse(i*spaceingSize,j*spaceingSize, topR10ectSize);
-	// rect(i*spaceingSize,j*spaceingSize, topRectSize, topRectSize);
-	// push();
 	angleMode(DEGREES);
-	// if(i%5!=0){
-		// rotate(45);
-		// translate(20,20);
-		
-	// pop();	
-// }
+	noStroke()
+	let backgroundColor = color("#dbbea1")
+	fill(backgroundColor)
+	rect(0,0, width, height)
+	////////////////////////////////////////////
+	let mainColor = color("#3F292B") // brown
+	let backupColor = color("#D34F73") // blush
+	let DetailColor = color("#DB7F67")
+	
+	
+	let noiseColor;
+	let noiseyColor; 
+	let moveXMap;
+	
+	
+	let orbSize = width / 20
+	let spacingSize = width / 12
+	
+	//////////////////////////////////////////////
+	fill(mainColor)
+	
+	for(let accross = 1; accross < width /spacingSize; accross++ ){
+		for(let down = 1; down +1 < height /spacingSize; down++){		
+			
+		noiseColor = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseColor",0,1, 200 )
+		noiseyLerp = lerpColor(mainColor,backupColor,noiseColor)  // https://p5js.org/reference/#/p5/lerpColor
+		fill(noiseyLerp)
+		push()
+		translate(spacingSize*accross,spacingSize*down )
+		// ellipse(spacingSize*accross,spacingSize*down ,orbSize)
+		rotate(17)
+		square(0,0,orbSize)
+		pop()
+			// if(cur_frac > 0.3 && noiseColor < 0.3){
+			// 	fill(225)
+			// 	moveXMap = map(cur_frac,0.3, 1, spacingSize*accross, spacingSize*(accross+1))
+			// 	ellipse(moveXMap,spacingSize*down,orbSize/2) 
+			// }
 		}
 	}
-
-}
-
-function drawRectangle(){}
+	
+	}
 
 
 
