@@ -2,21 +2,26 @@
 // var y=300;
 // var a=100;
 // var b=100;
+let topRectSize=width/10;
+let spaceingSize=width/9;
+
 
 function draw_one_frame(cur_frac) {
 
-	for(var i=0; i<=width; i+=width*0.15){
-		for(var j=0; j<=height; j+=width*0.15){
-			// push();	
+	for(let i=1; i<=width/spaceingSize; i++){
+		for(let j=1; j+1<=height/spaceingSize; j++){
+				
 	stroke(255);
 	noFill();
 	rectMode(CENTER);
-	rect(i, j, width*0.1, width*0.1);
-	
+	ellipse(i*spaceingSize,j*spaceingSize, topR10ectSize);
+	// rect(i*spaceingSize,j*spaceingSize, topRectSize, topRectSize);
+	// push();
 	angleMode(DEGREES);
 	// if(i%5!=0){
-		// translate(i,j);
 		// rotate(45);
+		// translate(20,20);
+		
 	// pop();	
 // }
 		}
