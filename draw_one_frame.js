@@ -34,18 +34,18 @@ function draw_one_frame(cur_frac) {
 	//////////////////////////////////////////////
 	fill(mainColor);
 	
-	for(let accross = 1; accross < width /spacingSize; accross++ ){
-		for(let down = 0.1; down +1 < height /spacingSize; down++){		
+	for(let accross = 0.5; accross < width /spacingSize; accross++ ){
+		for(let down = 0.2; down  < height /spacingSize; down++){		
 			
 		noiseColor = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseColor",0,1, 200 );
 		noiseyLerp = lerpColor(mainColor,backupColor,noiseColor);  // https://p5js.org/reference/#/p5/lerpColor
 		fill(noiseyLerp);
 		push();
 		rectMode(CENTER);
-		translate(spacingSize*accross,spacingSize*down*1.6);
+		translate(spacingSize*accross,spacingSize*down*1);
 		// ellipse(spacingSize*accross,spacingSize*down ,orbSize)
 		// if(frameCount%3=0){
-			// rotate(45);
+			rotate(cos(frameCount)*30 );
 		// }
 	
 		// rect(0,0,orbSize,orbSize);
@@ -58,19 +58,19 @@ function draw_one_frame(cur_frac) {
 		pop();
 
 		push();
-		translate(spacingSize*accross,spacingSize*down*1.6);
-		quad(-quadPosSize,orbSize*0.1,
-			-orbSize*0.05,orbSize*0.05+quadPosSize,
-			-orbSize*0.05,orbSize*1.05+quadPosSize,
-			-quadPosSize,orbSize*1.1);
+		translate(spacingSize*accross,spacingSize*down*1);
+		quad(-quadPosSize,orbSize*0.08,
+			-orbSize*0.04,orbSize*0.08+quadPosSize*0.5,
+			-orbSize*0.04,orbSize*0.08+quadPosSize*1.5,
+			-quadPosSize,orbSize*0.08+quadPosSize);
 		pop();
 
 		push();
-		translate(spacingSize*accross,spacingSize*down*1.6);
-		quad(quadPosSize,orbSize*0.1,
-			orbSize*0.05,orbSize*0.05+quadPosSize,
-			orbSize*0.05,orbSize*1.05+quadPosSize,
-			quadPosSize,orbSize*1.1);
+		translate(spacingSize*accross,spacingSize*down*1);
+		quad(quadPosSize,orbSize*0.08,
+			orbSize*0.04,orbSize*0.08+quadPosSize*0.5,
+			orbSize*0.04,orbSize*0.08+quadPosSize*1.5,
+			quadPosSize,orbSize*0.08+quadPosSize);
 		pop();
 
 
