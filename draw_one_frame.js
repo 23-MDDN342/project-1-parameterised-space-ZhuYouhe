@@ -9,14 +9,15 @@
 
 function draw_one_frame(cur_frac) {
 	angleMode(DEGREES);
-	noStroke()
-	let backgroundColor = color("#dbbea1")
-	fill(backgroundColor)
-	rect(0,0, width, height)
+	
+	noStroke();
+	let backgroundColor = color("#dbbea1");
+	fill(backgroundColor);
+	rect(0,0, width, height);
 	////////////////////////////////////////////
-	let mainColor = color("#3F292B") // brown
-	let backupColor = color("#D34F73") // blush
-	let DetailColor = color("#DB7F67")
+	let mainColor = color("#3F292B"); // brown
+	let backupColor = color("#D34F73"); // blush
+	let DetailColor = color("#DB7F67");
 	
 	
 	let noiseColor;
@@ -24,24 +25,47 @@ function draw_one_frame(cur_frac) {
 	let moveXMap;
 	
 	
-	let orbSize = width / 20
-	let spacingSize = width / 12
+	let orbSize = width / 20;
+	let spacingSize = width / 12;
+	let quadPosSize = sqrt(sq(orbSize)/2);
 	
 	//////////////////////////////////////////////
-	fill(mainColor)
+	fill(mainColor);
 	
 	for(let accross = 1; accross < width /spacingSize; accross++ ){
-		for(let down = 1; down +1 < height /spacingSize; down++){		
+		for(let down = 0.1; down +1 < height /spacingSize; down++){		
 			
-		noiseColor = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseColor",0,1, 200 )
-		noiseyLerp = lerpColor(mainColor,backupColor,noiseColor)  // https://p5js.org/reference/#/p5/lerpColor
-		fill(noiseyLerp)
-		push()
-		translate(spacingSize*accross,spacingSize*down )
+		noiseColor = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseColor",0,1, 200 );
+		noiseyLerp = lerpColor(mainColor,backupColor,noiseColor);  // https://p5js.org/reference/#/p5/lerpColor
+		fill(noiseyLerp);
+		push();
+		rectMode(CENTER);
+		translate(spacingSize*accross,spacingSize*down*1.6);
 		// ellipse(spacingSize*accross,spacingSize*down ,orbSize)
-		rotate(17)
-		square(0,0,orbSize)
-		pop()
+		// if(frameCount%3=0){
+			rotate(45);
+		// }
+		
+		rect(0,0,orbSize,orbSize);
+		pop();
+
+		push();
+		translate(spacingSize*accross,spacingSize*down*1.6);
+		quad(-quadPosSize,orbSize*0.1,
+			-orbSize*0.05,orbSize*0.05+quadPosSize,
+			-orbSize*0.05,orbSize*1.05+quadPosSize,
+			-quadPosSize,orbSize*1.1);
+		pop();
+
+		push();
+		translate(spacingSize*accross,spacingSize*down*1.6);
+		quad(quadPosSize,orbSize*0.1,
+			orbSize*0.05,orbSize*0.05+quadPosSize,
+			orbSize*0.05,orbSize*1.05+quadPosSize,
+			quadPosSize,orbSize*1.1);
+		pop();
+
+
 			// if(cur_frac > 0.3 && noiseColor < 0.3){
 			// 	fill(225)
 			// 	moveXMap = map(cur_frac,0.3, 1, spacingSize*accross, spacingSize*(accross+1))
