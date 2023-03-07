@@ -28,6 +28,8 @@ function draw_one_frame(cur_frac) {
 	let orbSize = width / 20;
 	let spacingSize = width / 12;
 	let quadPosSize = sqrt(sq(orbSize)/2);
+
+	let t=1;
 	
 	//////////////////////////////////////////////
 	fill(mainColor);
@@ -43,10 +45,16 @@ function draw_one_frame(cur_frac) {
 		translate(spacingSize*accross,spacingSize*down*1.6);
 		// ellipse(spacingSize*accross,spacingSize*down ,orbSize)
 		// if(frameCount%3=0){
-			rotate(45);
+			// rotate(45);
 		// }
-		
-		rect(0,0,orbSize,orbSize);
+	
+		// rect(0,0,orbSize,orbSize);
+
+		quad(-quadPosSize,0,
+			0,-quadPosSize/2,
+			quadPosSize,0,
+			0,quadPosSize/2);
+
 		pop();
 
 		push();
@@ -72,6 +80,7 @@ function draw_one_frame(cur_frac) {
 			// 	ellipse(moveXMap,spacingSize*down,orbSize/2) 
 			// }
 		}
+		
 	}
 	
 	}
