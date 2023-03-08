@@ -28,9 +28,30 @@ function draw_one_frame(cur_frac) {
 	let orbSize = width / 20;
 	let spacingSize = width / 12;
 	let quadPosSize = sqrt(sq(orbSize)/2);
+	let topSqRot = map(cur_frac, 0, 1, 0, 45);
 
-	let t=1;
+	let topQuad_posX = [
+		-quadPosSize,
+		-quadPosSize,
+		-quadPosSize,
+		 0,
+		 quadPosSize,
+		 quadPosSize,
+		 quadPosSize,
+		 0
+	   ]
 	
+	let topQuad_posY = [
+		0,
+		quadPosSize/2,
+		quadPosSize,
+		quadPosSize,
+		quadPosSize,
+		quadPosSize/2,
+		0,
+		0
+	   ]
+
 	//////////////////////////////////////////////
 	fill(mainColor);
 	
@@ -44,33 +65,56 @@ function draw_one_frame(cur_frac) {
 		rectMode(CENTER);
 		translate(spacingSize*accross,spacingSize*down*1);
 		// ellipse(spacingSize*accross,spacingSize*down ,orbSize)
-		// if(frameCount%3=0){
-			rotate(cos(frameCount)*30 );
-		// }
+		
+			rotate(-22.5);
+			shearX(45);
+			scale(1,sqrt(0.5));
 	
-		// rect(0,0,orbSize,orbSize);
+		square(0,0,quadPosSize);
 
-		quad(-quadPosSize,0,
-			0,-quadPosSize/2,
-			quadPosSize,0,
-			0,quadPosSize/2);
+		// for(let i=0; i<topQuad_posX.length-1; i++) {
+		// 	let cur_posX = map(cur_frac, 0, 1, topQuad_posX[i], topQuad_posX[i+1]);
+		// 	let cur_posY = map(cur_frac, 0, 1, topQuad_posY[i], topQuad_posY[i+1]);
+		// 	quad();
+		//   }
+
+		// quad(-quadPosSize,0,
+		// 	0,-quadPosSize/2,
+		// 	quadPosSize,0,
+		// 	0,quadPosSize/2);
 
 		pop();
 
 		push();
-		translate(spacingSize*accross,spacingSize*down*1);
-		quad(-quadPosSize,orbSize*0.08,
-			-orbSize*0.04,orbSize*0.08+quadPosSize*0.5,
-			-orbSize*0.04,orbSize*0.08+quadPosSize*1.5,
-			-quadPosSize,orbSize*0.08+quadPosSize);
+		rectMode(CENTER);
+		translate(spacingSize*accross-quadPosSize*0.47,spacingSize*down+orbSize*0.52);
+
+		// rotate(-22.5);
+			shearY(22.5);
+			scale(0.9,1);
+	
+		square(0,0,quadPosSize);
+
+
+		// quad(-quadPosSize,orbSize*0.08,
+		// 	-orbSize*0.04,orbSize*0.08+quadPosSize*0.5,
+		// 	-orbSize*0.04,orbSize*0.08+quadPosSize*1.5,
+		// 	-quadPosSize,orbSize*0.08+quadPosSize);
 		pop();
 
 		push();
-		translate(spacingSize*accross,spacingSize*down*1);
-		quad(quadPosSize,orbSize*0.08,
-			orbSize*0.04,orbSize*0.08+quadPosSize*0.5,
-			orbSize*0.04,orbSize*0.08+quadPosSize*1.5,
-			quadPosSize,orbSize*0.08+quadPosSize);
+		rectMode(CENTER);
+		translate(spacingSize*accross+quadPosSize*0.47,spacingSize*down+orbSize*0.52);
+
+		shearY(-22.5);
+		scale(0.9,1);
+	
+		square(0,0,quadPosSize);
+
+		// quad(quadPosSize,orbSize*0.08,
+		// 	orbSize*0.04,orbSize*0.08+quadPosSize*0.5,
+		// 	orbSize*0.04,orbSize*0.08+quadPosSize*1.5,
+		// 	quadPosSize,orbSize*0.08+quadPosSize);
 		pop();
 
 
