@@ -1,3 +1,3 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10300841&assignment_repo_type=AssignmentRepo)
 ### 2023 MDDN342 Project 1: Parameterised Space
-Replace the 'quad' with 'square', because I've found the 'shear' function is quite useful in twising a square shape, less codes than before, it's a bit difficult to find the proper positions for those shapes though.
+Now the shapes can change between 'quad' and 'square' along with 'cur_frac', it's kind of what I want at the beginning. The problem is that they are changing too fast, I'll make them slow down.
