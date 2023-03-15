@@ -5,7 +5,7 @@
 // let topRectSize=width/10;
 // let spaceingSize=width/9;
 
-
+const ease = new p5.Ease();
 
 function draw_one_frame(cur_frac) {
 	angleMode(DEGREES);
@@ -19,6 +19,7 @@ function draw_one_frame(cur_frac) {
 	let backupColor = color("#D34F73"); // blush
 	let DetailColor = color("#DB7F67");
 
+	const easeMove = ease.exponentialOut(cur_frac);
 	let orbSize = width / 20;
 	let sqRadius = width / 400;
 	let spacingSize = width / 8.4;
@@ -64,8 +65,8 @@ function draw_one_frame(cur_frac) {
 		let top_deformQuad = map(cur_frac*2,1.4,2,45,0);
 		let top_scaleSquare = map(cur_frac*2,0.4,1,1,0.5);
 		let top_scaleQuad = map(cur_frac*2,1.4,2,0.5,1);
-		let top_posSquare = map(cur_frac*2,0.4,1,orbSize/6,0);
-		let top_posQuad = map(cur_frac*2,1.4,2,0,orbSize/6);
+		let top_posSquare = map(cur_frac,0.2,0.5,orbSize/6,0);
+		let top_posQuad = map(cur_frac,0.7,1,0,orbSize/6);
 
 		
 		// ellipse(spacingSize*accross,spacingSize*down ,orbSize)
