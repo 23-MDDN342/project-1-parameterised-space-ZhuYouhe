@@ -19,7 +19,9 @@ function draw_one_frame(cur_frac) {
 	let backupColor = color("#D34F73"); // blush
 	let DetailColor = color("#DB7F67");
 
-	const easeMove = ease.exponentialOut(cur_frac);
+	const easeMove = ease.circularInOut(cur_frac);
+	const easeMoveLeft = ease.circularInOut(cur_frac);
+
 	let orbSize = width / 20;
 	let sqRadius = width / 400;
 	let spacingSize = width / 8.4;
@@ -34,11 +36,11 @@ function draw_one_frame(cur_frac) {
 	drawSquare();
 	pop();
 
-	push();
-	translate(spacingSize*8.5,spacingSize*4.3);
-	rotate(180);
-	drawSquare();
-	pop();
+	// push();
+	// translate(spacingSize*8.5,spacingSize*4.3);
+	// rotate(180);
+	// drawSquare();
+	// pop();
 
 
 	//Draw square to cube function
@@ -56,20 +58,80 @@ function draw_one_frame(cur_frac) {
 		noiseyLerp = lerpColor(mainColor,backupColor,noiseColor);  // https://p5js.org/reference/#/p5/lerpColor
 		fill(noiseyLerp);
 
+		///////////////////////////////////
+		//Draw shade quad
+push();
+rectMode(CENTER);
+fill(150);
+let shade_rotSquare = map(cur_frac, 0.2,0.5, 0, -22.5); 
+let shade_rotQuad = map(cur_frac,0.7,1, -22.5, 0);
+let shade_deformSquare = map(cur_frac,0.2,0.5,0, 45);
+let shade_deformQuad = map(cur_frac,0.7,1,45,0);
+let shade_scaleSquare = map(cur_frac,0.2,0.5,1,0.5);
+let shade_scaleQuad = map(cur_frac,0.7,1,0.5,1);
+let shade_posSquare = map(cur_frac,0.2,0.5,orbSize/6,0);
+let shade_posQuad = map(cur_frac,0.7,1,0,orbSize/6);
+
+if(cur_frac<=0.2){
+	translate(spacingSize*accross+quadPosSize*1.1,spacingSize*down-orbSize/6);
+	rotate(0);
+	shearX(0);
+	scale(1,sqrt(1));
+} else if(cur_frac>0.2 && cur_frac<=0.5){
+	translate(spacingSize*accross+quadPosSize*1.1,spacingSize*down-shade_posSquare);
+	rotate(shade_rotSquare);
+	shearX(shade_deformSquare);
+	scale(1,sqrt(shade_scaleSquare));
+} else if(cur_frac>0.5 && cur_frac<=0.7){
+	translate(spacingSize*accross+quadPosSize*1.1,spacingSize*down);
+	rotate(-22.5);
+	shearX(45);
+	scale(1,sqrt(0.5));
+} else if(cur_frac>0.7){
+	translate(spacingSize*accross+quadPosSize*1.1,spacingSize*down-shade_posQuad);
+	rotate(shade_rotQuad);
+	shearX(shade_deformQuad);
+	scale(1,sqrt(shade_scaleQuad));
+}
+	
+// let top_rotSquare = map(easeMove, 0.2,0.5, 0, -22.5); 
+// let top_rotQuad = map(easeMove,0.7,1, -22.5, 0);
+// let top_deformSquare = map(easeMove,0.2,0.5,0, 45);
+// let top_deformQuad = map(easeMove,0.7,1,45,0);
+// let top_scaleSquare = map(easeMove,0.2,0.5,1,0.5);
+// let top_scaleQuad = map(easeMove,0.7,1,0.5,1);
+// let top_posSquare = map(easeMove,0.2,0.5,orbSize/6,0);
+// let top_posQuad = map(easeMove,0.7,1,0,orbSize/6);
+
+// if(cur_frac<=0.5){
+// 	translate(spacingSize*accross,spacingSize*down-top_posSquare);
+// 	rotate(top_rotSquare);
+// 	shearX(top_deformSquare);
+// 	scale(1,sqrt(top_scaleSquare));
+// } else {
+// 	translate(spacingSize*accross,spacingSize*down-top_posQuad);
+// 	rotate(top_rotQuad);
+// 	shearX(top_deformQuad);
+// 	scale(1,sqrt(top_scaleQuad));
+// }
+
+square(0,0,quadPosSize,sqRadius);
+
+pop();
+///////////////////////////////////////
+
 		//Draw top quad
 		push();
 		rectMode(CENTER);
-		let top_rotSquare = map(cur_frac*2, 0.4,1, 0, -22.5); 
-		let top_rotQuad = map(cur_frac*2, 1.4,2, -22.5, 0);
-		let top_deformSquare = map(cur_frac*2,0.4,1,0, 45);
-		let top_deformQuad = map(cur_frac*2,1.4,2,45,0);
-		let top_scaleSquare = map(cur_frac*2,0.4,1,1,0.5);
-		let top_scaleQuad = map(cur_frac*2,1.4,2,0.5,1);
+		let top_rotSquare = map(cur_frac, 0.2,0.5, 0, -22.5); 
+		let top_rotQuad = map(cur_frac,0.7,1, -22.5, 0);
+		let top_deformSquare = map(cur_frac,0.2,0.5,0, 45);
+		let top_deformQuad = map(cur_frac,0.7,1,45,0);
+		let top_scaleSquare = map(cur_frac,0.2,0.5,1,0.5);
+		let top_scaleQuad = map(cur_frac,0.7,1,0.5,1);
 		let top_posSquare = map(cur_frac,0.2,0.5,orbSize/6,0);
 		let top_posQuad = map(cur_frac,0.7,1,0,orbSize/6);
 
-		
-		// ellipse(spacingSize*accross,spacingSize*down ,orbSize)
 		if(cur_frac<=0.2){
 			translate(spacingSize*accross,spacingSize*down-orbSize/6);
 			rotate(0);
@@ -92,17 +154,39 @@ function draw_one_frame(cur_frac) {
 			scale(1,sqrt(top_scaleQuad));
 		}
 			
+		// let top_rotSquare = map(easeMove, 0.2,0.5, 0, -22.5); 
+		// let top_rotQuad = map(easeMove,0.7,1, -22.5, 0);
+		// let top_deformSquare = map(easeMove,0.2,0.5,0, 45);
+		// let top_deformQuad = map(easeMove,0.7,1,45,0);
+		// let top_scaleSquare = map(easeMove,0.2,0.5,1,0.5);
+		// let top_scaleQuad = map(easeMove,0.7,1,0.5,1);
+		// let top_posSquare = map(easeMove,0.2,0.5,orbSize/6,0);
+		// let top_posQuad = map(easeMove,0.7,1,0,orbSize/6);
+
+		// if(cur_frac<=0.5){
+		// 	translate(spacingSize*accross,spacingSize*down-top_posSquare);
+		// 	rotate(top_rotSquare);
+		// 	shearX(top_deformSquare);
+		// 	scale(1,sqrt(top_scaleSquare));
+		// } else {
+		// 	translate(spacingSize*accross,spacingSize*down-top_posQuad);
+		// 	rotate(top_rotQuad);
+		// 	shearX(top_deformQuad);
+		// 	scale(1,sqrt(top_scaleQuad));
+		// }
+
 		square(0,0,quadPosSize,sqRadius);
 
 		pop();
 ///////////////////////////////////////
+
 		//Draw left quad
 		push();
 		rectMode(CENTER);
-		let left_deformSquare = map(cur_frac*2,0,1,0,22.5);
-		let left_deformQuad = map(cur_frac*2,1,2,22.5,0);
-		let left_scaleSquare = map(cur_frac*2,0,1,1,0.9);
-		let left_scaleQuad = map(cur_frac*2,1,2,0.9,1);
+		let left_deformSquare = map(cur_frac,0,0.5,0,22.5);
+		let left_deformQuad = map(cur_frac,0.5,1,22.5,0);
+		let left_scaleSquare = map(cur_frac,0,0.5,1,0.9);
+		let left_scaleQuad = map(cur_frac,0.5,1,0.9,1);
 		
 		if(cur_frac<=0.2){
 			translate(spacingSize*accross-quadPosSize*0.47-orbSize/12,spacingSize*down+orbSize*0.52+orbSize/6);
@@ -122,6 +206,21 @@ function draw_one_frame(cur_frac) {
 			scale(left_scaleQuad,1);
 		}
 	
+		// let left_deformSquare = map(easeMoveLeft,0,0.5,0,22.5);
+		// let left_deformQuad = map(easeMoveLeft,0.5,1,22.5,0);
+		// let left_scaleSquare = map(easeMoveLeft,0,0.5,1,0.9);
+		// let left_scaleQuad = map(easeMoveLeft,0.5,1,0.9,1);
+
+		// if(cur_frac<=0.5){
+		// 	translate(spacingSize*accross-quadPosSize*0.47-top_posSquare/2,spacingSize*down+orbSize*0.52+top_posSquare);
+		// 	shearY(left_deformSquare);
+		// 	scale(left_scaleSquare,1);
+		// } else {
+		// 	translate(spacingSize*accross-quadPosSize*0.47-top_posQuad/2,spacingSize*down+orbSize*0.52+top_posQuad);
+		// 	shearY(left_deformQuad);
+		// 	scale(left_scaleQuad,1);
+		// } 
+
 		square(0,0,quadPosSize,sqRadius);
 
 		pop();
@@ -129,10 +228,10 @@ function draw_one_frame(cur_frac) {
 		//Draw right quad
 		push();
 		rectMode(CENTER);
-		let right_deformSquare = map(cur_frac*2,0,1,0,-22.5);
-		let right_deformQuad = map(cur_frac*2,1,2,-22.5,0);
-		let right_scaleSquare = map(cur_frac*2,0,1,1,0.9);
-		let right_scaleQuad = map(cur_frac*2,1,2,0.9,1);
+		let right_deformSquare = map(cur_frac,0,0.5,0,-22.5);
+		let right_deformQuad = map(cur_frac,0.5,1,-22.5,0);
+		let right_scaleSquare = map(cur_frac,0,0.5,1,0.9);
+		let right_scaleQuad = map(cur_frac,0.5,1,0.9,1);
 		
 		if(cur_frac<=0.2){
 			translate(spacingSize*accross+quadPosSize*0.47+orbSize/12,spacingSize*down+orbSize*0.52+orbSize/6);
@@ -151,6 +250,21 @@ function draw_one_frame(cur_frac) {
 			shearY(right_deformQuad);
 			scale(right_scaleQuad,1);
 		}
+
+		// let right_deformSquare = map(easeMoveLeft,0,0.5,0,-22.5);
+		// let right_deformQuad = map(easeMoveLeft,0.5,1,-22.5,0);
+		// let right_scaleSquare = map(easeMoveLeft,0,0.5,1,0.9);
+		// let right_scaleQuad = map(easeMoveLeft,0.5,1,0.9,1);
+
+		// if(cur_frac<=0.5){
+		// 	translate(spacingSize*accross+quadPosSize*0.47+top_posSquare/2,spacingSize*down+orbSize*0.52+top_posSquare);
+		// 	shearY(right_deformSquare);
+		// 	scale(right_scaleSquare,1);
+		// } else {
+		// 	translate(spacingSize*accross+quadPosSize*0.47+top_posQuad/2,spacingSize*down+orbSize*0.52+top_posQuad);
+		// 	shearY(right_deformQuad);
+		// 	scale(right_scaleQuad,1);
+		// }
 	
 		square(0,0,quadPosSize,sqRadius);
 
