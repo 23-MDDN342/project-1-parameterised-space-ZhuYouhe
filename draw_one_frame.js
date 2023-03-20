@@ -24,8 +24,8 @@ function draw_one_frame(cur_frac) {
 
 	let orbSize = width / 20;
 	let sqRadius = width / 400;
-	let spacingSize = width / 7;
-	let spacingSizeY = height / 6;
+	let spacingSize = width / 13;
+	let spacingSizeY = height / 5;
 	let quadPosSize = sqrt(sq(orbSize)/2);
 	
 	let noiseColor;
@@ -37,11 +37,11 @@ function draw_one_frame(cur_frac) {
 	drawSquare();
 	pop();
 
-	// push();
-	// translate(spacingSize*0.55,spacingSizeY*0.4);
-	// // rotate(180);
-	// drawSquare();
-	// pop();
+	push();
+	translate(-spacingSize*0.5,spacingSizeY*0.5);
+	// rotate(180);
+	drawSquare();
+	pop();
 
 
 	//Draw square to cube function
@@ -52,10 +52,10 @@ function draw_one_frame(cur_frac) {
 	//////////////////////////////////////////////
 	fill(mainColor);
 	
-	for(let accross = 0.4; accross < width /spacingSize; accross++ ){
-		for(let down = 0.3; down  < height /spacingSizeY; down++){		
+	for(let accross = 0; accross < width /spacingSize; accross++ ){
+		for(let down = 0; down  < height /spacingSizeY; down++){		
 			
-		noiseColor = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseColor",0,1, 200 );
+		noiseColor = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseColor",0,1, 100 );
 		noiseyLerp = lerpColor(mainColor,backupColor,noiseColor);  // https://p5js.org/reference/#/p5/lerpColor
 		fill(noiseyLerp);
 
