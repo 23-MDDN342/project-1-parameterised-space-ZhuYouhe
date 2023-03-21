@@ -23,9 +23,9 @@ function draw_one_frame(cur_frac) {
 	const easeMoveLeft = ease.circularInOut(cur_frac);
 
 	let orbSize = width / 30;
-	let sqRadius = width / 400;
-	let spacingSize = width / 14;
-	let spacingSizeY = height / 5;
+	let sqRadius = orbSize / 10;
+	let spacingSize = orbSize*2.1;
+	let spacingSizeY = orbSize*3.6;
 	let quadPosSize = sqrt(sq(orbSize)/2);
 	
 	let noiseColor;
@@ -39,7 +39,7 @@ function draw_one_frame(cur_frac) {
 	pop();
 
 	push();
-	translate(-sin(60)*orbSize*1.2,orbSize*1.7);
+	translate(-orbSize*1.1,orbSize*1.8);
 	// rotate(180);
 	drawSquare();
 	pop();
@@ -53,8 +53,8 @@ function draw_one_frame(cur_frac) {
 	//////////////////////////////////////////////
 	fill(mainColor);
 	
-	for(let accross = 0.5; accross < width /spacingSize; accross++ ){
-		for(let down = 0.1; down  < height /spacingSizeY; down++){		
+	for(let accross = 0; accross < width*1.6 /spacingSize; accross++ ){
+		for(let down = 0; down  < height*1.6 /spacingSizeY; down++){		
 			
 		noiseColor = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseColor",0,1, 100 );
 		noiseyLerp = lerpColor(mainColor,backupColor,noiseColor);  // https://p5js.org/reference/#/p5/lerpColor
