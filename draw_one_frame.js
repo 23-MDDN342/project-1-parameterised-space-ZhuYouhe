@@ -23,8 +23,8 @@ function draw_one_frame(cur_frac) {
 	const easeMoveLeft = ease.circularInOut(cur_frac);
 
 	let orbSize = width / 30;
-	let sqRadius = orbSize / 10;
-	let spacingSize = orbSize*2.1;
+	let sqRadius = orbSize / 14;
+	let spacingSize = orbSize*2.2;
 	let spacingSizeY = orbSize*3.6;
 	let quadPosSize = sqrt(sq(orbSize)/2);
 	
@@ -53,8 +53,8 @@ function draw_one_frame(cur_frac) {
 	//////////////////////////////////////////////
 	fill(mainColor);
 	
-	for(let accross = 0; accross < width*1.6 /spacingSize; accross++ ){
-		for(let down = 0; down  < height*1.6 /spacingSizeY; down++){		
+	for(let accross = -1; accross < width*1.6 /spacingSize; accross++ ){
+		for(let down = -1; down  < height*1.6 /spacingSizeY; down++){		
 			
 		noiseColor = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseColor",0,1, 100 );
 		noiseyLerp = lerpColor(mainColor,backupColor,noiseColor);  // https://p5js.org/reference/#/p5/lerpColor
@@ -74,9 +74,10 @@ function draw_one_frame(cur_frac) {
 		let top_deformQuad = map(cur_frac,0.7,1,45,0);
 		let top_scaleSquare = map(cur_frac,0.2,0.5,1,0.5);
 		let top_scaleQuad = map(cur_frac,0.7,1,0.5,1);
-		let top_posSquare = map(cur_frac,0.2,0.5,orbSize/6,0);
-		let top_posQuad = map(cur_frac,0.7,1,0,orbSize/6);
-		
+		let top_MoveRight = map(cur_frac,0.2,0.5,0,orbSize*0.55);
+		let top_MoveLeft = map(cur_frac,0.7,1,orbSize*0.55,0);
+		let top_MoveUp = map(cur_frac,0.2,0.5,0,-orbSize*0.55);
+		let top_MoveDown = map(cur_frac,0.7,1,-orbSize*0.55,0);
 
 		if(cur_frac<0.2){
 			translate(spacingSize*accross,spacingSizeY*down);
@@ -85,19 +86,19 @@ function draw_one_frame(cur_frac) {
 			scale(1,sqrt(1));
 			top_radius = sqRadius*10;
 		} else if(cur_frac>=0.2 && cur_frac<0.5){
-			translate(spacingSize*accross,spacingSizeY*down);
+			translate(spacingSize*accross+top_MoveRight,spacingSizeY*down+top_MoveUp);
 			rotate(top_rotSquare);
 			shearX(top_deformSquare);
 			scale(1,sqrt(top_scaleSquare));
 			top_radius = top_radiusMapRd;
 		} else if(cur_frac>=0.5 && cur_frac<0.7){
-			translate(spacingSize*accross,spacingSizeY*down);
+			translate(spacingSize*accross+orbSize*0.55,spacingSizeY*down-orbSize*0.55);
 			rotate(-22.5);
 			shearX(45);
 			scale(1,sqrt(0.5));
 			top_radius = sqRadius;
 		} else if(cur_frac>=0.7){
-			translate(spacingSize*accross,spacingSizeY*down);
+			translate(spacingSize*accross+top_MoveLeft,spacingSizeY*down+top_MoveDown);
 			rotate(top_rotQuad);
 			shearX(top_deformQuad);
 			scale(1,sqrt(top_scaleQuad));
@@ -115,8 +116,10 @@ function draw_one_frame(cur_frac) {
 		let left_deformQuad = map(cur_frac,0.7,1,22.5,0);
 		let left_scaleSquare = map(cur_frac,0.2,0.5,1,0.9);
 		let left_scaleQuad = map(cur_frac,0.7,1,0.9,1);
-		let left_moveXLeft = map(cur_frac,0.2,0.5,0,quadPosSize*0.47+top_posSquare/2);
-		let left_moveXRight = map(cur_frac,0.7,1,quadPosSize*0.47+top_posSquare/2,0);
+		let left_moveRight = map(cur_frac,0.2,0.5,0,orbSize*1.18);
+		let left_moveLeft = map(cur_frac,0.7,1,orbSize*1.18,0);
+		let left_MoveDown = map(cur_frac,0.2,0.5,0,orbSize*0.78);
+		let left_MoveUp = map(cur_frac,0.7,1,orbSize*0.78,0);
 		
 		if(cur_frac<0.2){
 			// translate(spacingSize*accross-quadPosSize*0.47-orbSize/12,spacingSize*down+orbSize*0.52+orbSize/6);
@@ -125,17 +128,17 @@ function draw_one_frame(cur_frac) {
 			scale(1,1);
 			top_radius = sqRadius*10;
 		} else if(cur_frac>=0.2 && cur_frac<0.5){
-			translate(spacingSize*accross,spacingSizeY*down+orbSize*1.2);
+			translate(spacingSize*accross+left_moveRight,spacingSizeY*down+orbSize*1.2+left_MoveDown);
 			shearY(left_deformSquare);
 			scale(left_scaleSquare,1);
 			top_radius = top_radiusMapRd;
 		} else if(cur_frac>=0.5 && cur_frac<0.7){
-			translate(spacingSize*accross,spacingSizeY*down+orbSize*1.2);
+			translate(spacingSize*accross+orbSize*1.18,spacingSizeY*down+orbSize*1.2+orbSize*0.78);
 			shearY(22.5);
 			scale(0.9,1);
 			top_radius = sqRadius;
 		} else if(cur_frac>=0.7){
-			translate(spacingSize*accross,spacingSizeY*down+orbSize*1.2);
+			translate(spacingSize*accross+left_moveLeft,spacingSizeY*down+orbSize*1.2+left_MoveUp);
 			shearY(left_deformQuad);
 			scale(left_scaleQuad,1);
 			top_radius = top_radiusMapSq;
@@ -152,26 +155,28 @@ function draw_one_frame(cur_frac) {
 		let right_deformQuad = map(cur_frac,0.7,1,-22.5,0);
 		let right_scaleSquare = map(cur_frac,0.2,0.5,1,0.9);
 		let right_scaleQuad = map(cur_frac,0.7,1,0.9,1);
-		let right_moveXLeft = map(cur_frac,0.2,0.5,0,quadPosSize*0.5+top_posSquare/2);
-		let right_moveXRight = map(cur_frac,0.7,1,quadPosSize*0.5+top_posSquare/2,0);
+		let right_moveRight = map(cur_frac,0.2,0.5,0,orbSize*1.02);
+		let right_moveLeft = map(cur_frac,0.7,1,orbSize*1.02,0);
+		let right_MoveUp = map(cur_frac,0.2,0.5,0,-orbSize*2.22);
+		let right_MoveDown = map(cur_frac,0.7,1,-orbSize*2.22,0);
 		
 		if(cur_frac<0.2){
-			translate(spacingSize*accross+sin(60)*orbSize*1.2,spacingSizeY*down+orbSize*0.6);
+			translate(spacingSize*accross+orbSize*1.1,spacingSizeY*down+orbSize*0.6);
 			shearY(0);
 			scale(1,1);
 			top_radius = sqRadius*10;
 		} else if(cur_frac>=0.2 && cur_frac<0.5){
-			translate(spacingSize*accross+sin(60)*orbSize*1.2,spacingSizeY*down+orbSize*0.6);
+			translate(spacingSize*accross+orbSize*1.1+right_moveRight,spacingSizeY*down+orbSize*0.6+right_MoveUp);
 			shearY(right_deformSquare);
 			scale(right_scaleSquare,1);
 			top_radius = top_radiusMapRd;
 		} else if(cur_frac>=0.5 && cur_frac<0.7){
-			translate(spacingSize*accross+sin(60)*orbSize*1.2,spacingSizeY*down+orbSize*0.6);
+			translate(spacingSize*accross+orbSize*1.1+orbSize*1.02,spacingSizeY*down+orbSize*0.6-orbSize*2.22);
 			shearY(-22.5);
 			scale(0.9,1);
 			top_radius = sqRadius;
 		} else if(cur_frac>=0.7){
-			translate(spacingSize*accross+sin(60)*orbSize*1.2,spacingSizeY*down+orbSize*0.6);
+			translate(spacingSize*accross+orbSize*1.1+right_moveLeft,spacingSizeY*down+orbSize*0.6+right_MoveDown);
 			shearY(right_deformQuad);
 			scale(right_scaleQuad,1);
 			top_radius = top_radiusMapSq;
