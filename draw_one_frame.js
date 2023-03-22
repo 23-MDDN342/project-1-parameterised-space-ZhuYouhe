@@ -22,6 +22,8 @@ function draw_one_frame(cur_frac) {
 
 	let noiseColor;
 	let noiseyLerp;
+	let noiseSize;
+	let noiseLine;
 	let moveYMap;
 
 	//////////////////////////////////////////////
@@ -47,6 +49,8 @@ function draw_one_frame(cur_frac) {
 			
 		noiseColor = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseColor",0,1, 100 );
 		noiseyLerp = lerpColor(mainColor,backupColor,noiseColor);  // https://p5js.org/reference/#/p5/lerpColor
+		noiseSize = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseSize",0,1, 80 );
+		noiseLine = getNoiseValue(spacingSize*accross,spacingSize*down, 0.8, "noiseLine",0,1, 60 );
 		
 		// fill(noiseyLerp);
 
@@ -151,7 +155,7 @@ function draw_one_frame(cur_frac) {
 			changeRadius = changeRadiusMapSq;
 		}
 	
-		square(0,0,orbSize*noiseColor,changeRadius);
+		square(0,0,orbSize*noiseSize*0.9,changeRadius);
 		
 		pop();
 		/////////////////////////////////////
@@ -199,7 +203,7 @@ function draw_one_frame(cur_frac) {
 			changeRadius = changeRadiusMapSq;
 		}
 	
-		square(0,0,orbSize*noiseColor,changeRadius);
+		square(0,0,orbSize*noiseLine,changeRadius);
 		
 		pop();
 		/////////////////////////////////////
@@ -287,7 +291,7 @@ function draw_one_frame(cur_frac) {
 			changeRadius = changeRadiusMapSq;
 		}
 
-		square(0,0,orbSize * noiseColor,changeRadius);
+		square(0,0,orbSize * noiseSize,changeRadius);
 
 		pop();
 		/////////////////////////////////////
@@ -329,7 +333,7 @@ function draw_one_frame(cur_frac) {
 			changeRadius = changeRadiusMapSq;
 		}
 
-		square(0,0,orbSize * noiseColor,changeRadius);
+		square(0,0,orbSize * noiseLine,changeRadius);
 
 		pop();
 		/////////////////////////////////////
@@ -417,7 +421,7 @@ function draw_one_frame(cur_frac) {
 			changeRadius = changeRadiusMapSq;
 		}
 
-		square(0,0,orbSize * noiseColor,changeRadius);
+		square(0,0,orbSize * noiseLine,changeRadius);
 
 		pop();
 		///////////////////////////////////////
@@ -459,7 +463,7 @@ function draw_one_frame(cur_frac) {
 			changeRadius = changeRadiusMapSq;
 		}
 
-		square(0,0,orbSize * noiseColor,changeRadius);
+		square(0,0,orbSize * noiseSize,changeRadius);
 
 		pop();
 		///////////////////////////////////////
