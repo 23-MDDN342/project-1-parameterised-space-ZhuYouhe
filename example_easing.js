@@ -20,7 +20,7 @@ function draw_one_frame(cur_frac) {
   line(left_x - ellipse_radius, 0, left_x - ellipse_radius, height);
   line(right_x + ellipse_radius, 0, right_x + ellipse_radius, height);
 
-  const ease_amount_across = ease.circularInOut(amount_across); // OK
+  const ease_amount_across = ease.exponentialOut(amount_across); // OK
   // try these other versions or look up others in the docs
   // const ease_amount_across = ease.doubleCircularOgee(amount_across, 0.5);
   // const ease_amount_across = ease.bounceOut(amount_across, 10);
