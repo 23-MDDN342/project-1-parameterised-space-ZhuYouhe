@@ -1,3 +1,4 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10300841&assignment_repo_type=AssignmentRepo)
 ### 2023 MDDN342 Project 1: Parameterised Space
-Finalized my work. I've made some color changing between circles and cubes, also added more noise shapes to avoid a boring feeling. The noise grey color makes other colors looking smoother.
+This is a loop motion practice I made with p5.js. The circles shapes will defrom into 3D like cube shapes, back and forth. All the shapes are parameterised that can relatively keep their size with any resolutions/scales. Loop and parameterisation are two keys of this project. My goal is to make a 2D and 3D switching effect wallpaper that everything is tidy and clean, but it's a bit mess or chaos when deforming.
+The basic idea comes from many satisfying loop animations and looping shapes. All these seamlessly loops can provide an endless feeling, which is so cool.
