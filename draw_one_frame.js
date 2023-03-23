@@ -52,8 +52,6 @@ function draw_one_frame(cur_frac) {
 				noiseSize = getNoiseValue(spacingSize * accross, spacingSize * down, 0.8, "noiseSize", 0, 1, 80);
 				noiseLine = getNoiseValue(spacingSize * accross, spacingSize * down, 0.8, "noiseLine", 0, 1, 60);
 
-				// fill(noiseyLerp);
-
 				let noiseyLerpCircle = lerpColor(mainColorCC, buackupColorCC, noiseColor);
 				let colorChange = lerpColor(noiseyLerpCircle, noiseyLerp, cur_frac);
 				let colorChangeRv = lerpColor(noiseyLerp, noiseyLerpCircle, cur_frac);
@@ -266,25 +264,21 @@ function draw_one_frame(cur_frac) {
 				fill(140);
 
 				if (cur_frac < firstStop) {
-					// fill(noiseyLerpCircle);
 					translate(spacingSize * accross, spacingSizeY * down + orbSize * 1.2);
 					shearY(0);
 					scale(1, 1);
 					changeRadius = sqRadius * 10;
 				} else if (cur_frac >= firstStop && cur_frac < 0.5) {
-					// fill(colorChange);
 					translate(spacingSize * accross + left_moveLeftS, spacingSizeY * down + orbSize * 1.2 + left_MoveDownS);
 					shearY(left_deformSquareS);
 					scale(left_scaleSquareS, 1);
 					changeRadius = changeRadiusMapRd;
 				} else if (cur_frac >= 0.5 && cur_frac < secondStop) {
-					// fill(noiseyLerp);
 					translate(spacingSize * accross - orbSize * 1.02, spacingSizeY * down + orbSize * 1.2 + orbSize * 0.78);
 					shearY(22.5);
 					scale(0.9, 1);
 					changeRadius = sqRadius;
 				} else if (cur_frac >= secondStop) {
-					// fill(colorChangeRv);
 					translate(spacingSize * accross + left_moveRightS, spacingSizeY * down + orbSize * 1.2 + left_MoveUpS);
 					shearY(left_deformQuadS);
 					scale(left_scaleQuadS, 1);
@@ -396,25 +390,21 @@ function draw_one_frame(cur_frac) {
 				fill(140);
 
 				if (cur_frac < firstStop) {
-					// fill(noiseyLerpCircle);
 					translate(spacingSize * accross + orbSize * 1.1, spacingSizeY * down + orbSize * 0.6);
 					shearY(0);
 					scale(1, 1);
 					changeRadius = sqRadius * 10;
 				} else if (cur_frac >= firstStop && cur_frac < 0.5) {
-					// fill(colorChange);
 					translate(spacingSize * accross + orbSize * 1.1 + right_moveRightS, spacingSizeY * down + orbSize * 0.6 + right_MoveUpS);
 					shearY(right_deformSquareS);
 					scale(right_scaleSquareS, 1);
 					changeRadius = changeRadiusMapRd;
 				} else if (cur_frac >= 0.5 && cur_frac < secondStop) {
-					// fill(noiseyLerp);
 					translate(spacingSize * accross + orbSize * 1.1 + orbSize * 1.02, spacingSizeY * down + orbSize * 0.6 - orbSize * 2.22);
 					shearY(-22.5);
 					scale(0.9, 1);
 					changeRadius = sqRadius;
 				} else if (cur_frac >= secondStop) {
-					// fill(colorChangeRv);
 					translate(spacingSize * accross + orbSize * 1.1 + right_moveLeftS, spacingSizeY * down + orbSize * 0.6 + right_MoveDownS);
 					shearY(right_deformQuadS);
 					scale(right_scaleQuadS, 1);
